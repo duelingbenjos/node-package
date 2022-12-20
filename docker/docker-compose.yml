@@ -1,6 +1,6 @@
 version: "3.7"
 services:
-  node:
+  lamden_node:
     container_name: lamden_node
     build:
       context: ./lamden/
@@ -20,11 +20,11 @@ services:
       - CONTRACTING_TAG=${CONTRACTING_TAG?}
     network_mode: host
 
-  webserver:
+  lamden_webserver:
     container_name: lamden_webserver
     image: lamden
     depends_on:
-      - node
+      - lamden_node
     working_dir: /lamden/lamden/nodes/masternode
     command: sh -c "python webserver.py -p ${LAMDEN_WS_PORT} -ep ${LAMDEN_ES_PORT}"
     volumes:
@@ -33,11 +33,11 @@ services:
     environment:
       - LAMDEN_SK=${LAMDEN_SK?}
 
-  event_service:
+  lamden_events:
     container_name: lamden_events
     image: lamden
     depends_on:
-      - node
+      - lamden_node
     working_dir: /lamden/lamden/nodes
     command: sh -c "python events.py -p ${LAMDEN_ES_PORT}"
     volumes:
