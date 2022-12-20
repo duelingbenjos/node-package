@@ -43,7 +43,7 @@ async def event(data):
     while utc_when < datetime.utcnow():
         asyncio.sleep(0.1)
 
-    subprocess.check_call(['make', 'restart'])
+    subprocess.check_call(['make', 'reboot'])
 
 async def main():
     await sio.connect(f'http://localhost:17080')
