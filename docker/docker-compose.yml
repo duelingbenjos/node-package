@@ -9,7 +9,7 @@ services:
         CONTRACTING_TAG: ${CONTRACTING_TAG?}
     image: lamden
     working_dir: /lamden
-    command: sh -c "[ -z ${BOOTNODES} ] && lamden start -d True || lamden join -d True"
+    command: sh -c "[ -z ${LAMDEN_BOOTNODES} ] && lamden start -d True || lamden join -d True"
     volumes:
       - ${HOME}/constitution.json:/root/constitution.json
       - ${HOME}/genesis_block.json:/root/genesis_block.json
@@ -18,7 +18,7 @@ services:
       - LAMDEN_SK=${LAMDEN_SK?}
       - LAMDEN_TAG=${LAMDEN_TAG?}
       - CONTRACTING_TAG=${CONTRACTING_TAG?}
-      - BOOTNODES=${BOOTNODES}
+      - LAMDEN_BOOTNODES=${LAMDEN_BOOTNODES}
     network_mode: host
 
   lamden_webserver:
