@@ -41,7 +41,7 @@ async def event(data):
     subprocess.check_call(['make', 'build'])
 
     while utc_when < datetime.utcnow():
-        asyncio.sleep(0.1)
+        asyncio.sleep(1)
 
     subprocess.check_call(['make', 'reboot'])
 

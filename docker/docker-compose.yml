@@ -18,6 +18,7 @@ services:
       - LAMDEN_SK=${LAMDEN_SK?}
       - LAMDEN_TAG=${LAMDEN_TAG?}
       - CONTRACTING_TAG=${CONTRACTING_TAG?}
+      - BOOTNODES=${BOOTNODES}
     network_mode: host
 
   lamden_webserver:
