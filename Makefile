@@ -22,7 +22,7 @@ upgrade: build
 
 # service=lamden-node make enter
 enter:
-	docker-compose -f $(COMPOSE_FILE) exec $(service) bash
+	docker compose -f $(COMPOSE_FILE) exec $(service) bash
 
 clean:
 	docker rmi lamden
