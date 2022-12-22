@@ -12,6 +12,8 @@ teardown:
 build:
 	docker compose -f $(COMPOSE_FILE) build --no-cache
 
+deploy: build boot
+
 reboot: teardown boot
 
 upgrade: build

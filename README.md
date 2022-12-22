@@ -28,6 +28,7 @@ export var_name=value
 To manage a node, the following `make` commands are available:
 - `make build`: Build a base lamden docker image used by all containers using the latest code of the version specified by `LAMDEN_TAG` and `CONTRACTING_TAG`.
 - `make boot`: Start all containers and related scripts.
+- `make deploy`: `build` and `boot` executed sequentially.
 - `make teardown`: Stop all containers and related scripts.
 - `make reboot`: `teardown` and `boot` executed sequentially.
 - `make upgrade`: Rebuild a base image and restart the containers with a fresh image.
