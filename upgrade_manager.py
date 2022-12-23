@@ -19,23 +19,19 @@ def parse_bootnodes(ips: list):
 
 @sio.event
 async def connect():
-    print('Connected to event service!')
     await sio.emit('join', {'room': 'upgrade'})
 
 @sio.event
 async def disconnect():
-    print('Disconnected from event service!')
     await sio.emit('leave', {'room': 'upgrade'})
 
 @sio.event
 async def event(data):
     data = data['data']
-    print(f'Received data: {data}')
 
     os.environ['LAMDEN_TAG'] = data['lamden_tag']
     os.environ['CONTRACTING_TAG'] = data['contracting_tag']
     os.environ['LAMDEN_BOOTNODES'] = parse_bootnodes(data['bootnode_ips'])
-    print(f'LAMDEN_BOOTNODES: {os.environ["LAMDEN_BOOTNODES"]}')
     utc_when = parser.parse(data['utc_when'])
 
     subprocess.check_call(['make', 'build'])
