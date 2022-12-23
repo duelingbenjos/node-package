@@ -1,12 +1,16 @@
 from datetime import datetime
 from dateutil import parser
 import asyncio
+import logging
 import os
 import re
 import socketio
 import subprocess
+import sys
 
-sio = socketio.AsyncClient(logger=True, engineio_logger=True)
+logging.basicConfig(stream=sys.stdout, format="%(levelname)s - %(name)s - %(message)s")
+log = logging.getLogger('manager')
+sio = socketio.AsyncClient(logger=logging.getLogger('socketio'), engineio_logger=logging.getLogger('engineio'))
 
 def validate_ip_address(ip_str):
     pattern = r"^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$"
@@ -19,24 +23,25 @@ def parse_bootnodes(ips: list):
 
 @sio.event
 async def connect():
-    print('Connected to event service!')
+    log.debug('Connected to event service!')
     await sio.emit('join', {'room': 'upgrade'})
 
 @sio.event
 async def disconnect():
-    print('Disconnected from event service!')
+    log.debug('Disconnected from event service!')
     await sio.emit('leave', {'room': 'upgrade'})
 
 @sio.event
 async def event(data):
     data = data['data']
-    print(f'Received data: {data}')
+    log.debug(f'Received data: {data}')
 
     os.environ['LAMDEN_TAG'] = data['lamden_tag']
     os.environ['CONTRACTING_TAG'] = data['contracting_tag']
     os.environ['LAMDEN_BOOTNODES'] = parse_bootnodes(data['bootnode_ips'])
-    print(f'LAMDEN_BOOTNODES: {os.environ["LAMDEN_BOOTNODES"]}')
     utc_when = parser.parse(data['utc_when'])
+
+    log.debug(f'LAMDEN_BOOTNODES: {os.environ["LAMDEN_BOOTNODES"]}')
 
     subprocess.check_call(['make', 'build'])
 
