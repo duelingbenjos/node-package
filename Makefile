@@ -20,7 +20,6 @@ upgrade: build
 	docker compose -f $(COMPOSE_FILE) down
 	docker compose -f $(COMPOSE_FILE) up -d
 
-# service=lamden-node make enter
 enter:
 	docker compose -f $(COMPOSE_FILE) exec $(service) bash
 
