@@ -1,7 +1,6 @@
 from datetime import datetime
 from dateutil import parser
 import asyncio
-import json
 import os
 import re
 import socketio
@@ -30,7 +29,7 @@ async def disconnect():
 
 @sio.event
 async def event(data):
-    data = json.loads(data['data'])
+    data = data['data']
     print(f'Received data: {data}')
 
     os.environ['LAMDEN_TAG'] = data['lamden_tag']
