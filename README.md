@@ -2,9 +2,10 @@
 This repository contains lamden node package.
 
 ### Prerequisites
-Linux machine<br/>
-[Docker](https://docs.docker.com/get-docker/)<br/>
-[Docker Compose](https://docs.docker.com/compose/install/)
+- [GNU make](https://www.gnu.org/software/make/)
+- [Docker](https://docs.docker.com/get-docker/)
+- [Docker Compose](https://docs.docker.com/compose/install/)
+- [Python](https://www.python.org/) 3.6 or later
 
 ### Configuration
 The Lamden node can be configured using environment variables. The following environment variables are supported:
