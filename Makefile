@@ -3,11 +3,11 @@ COMPOSE_FILE = docker/docker-compose.yml
 boot:
 	docker compose -f $(COMPOSE_FILE) up -d
 	@sleep 3
-	nohup python upgrade_manager.py > upgrade-manager.log 2>&1 &
+	nohup python upgrade.py > upgrade.log 2>&1 &
 
 teardown:
 	docker compose -f $(COMPOSE_FILE) down
-	- pkill -f upgrade_manager
+	- pkill -f upgrade
 
 build:
 	docker compose -f $(COMPOSE_FILE) build --no-cache
