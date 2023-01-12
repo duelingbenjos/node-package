@@ -16,6 +16,10 @@ services:
       - ${LAMDEN_ES_PORT}:${LAMDEN_ES_PORT}
     networks:
       - lamden_network
+    logging:
+      driver: local
+      options:
+        max-size: 10m
 
   lamden_webserver:
     container_name: lamden_webserver
@@ -32,6 +36,10 @@ services:
       - ${LAMDEN_WS_PORT}:${LAMDEN_WS_PORT}
     networks:
       - lamden_network
+    logging:
+      driver: local
+      options:
+        max-size: 10m
 
   lamden_node:
     container_name: lamden_node
@@ -54,6 +62,10 @@ services:
       - 19080:19080
     networks:
       - lamden_network
+    logging:
+      driver: local
+      options:
+        max-size: 10m
 
 networks:
   lamden_network:
