@@ -1,0 +1,14 @@
+{
+    "apps": [
+        {
+            "name": "lamden_block_service",
+            "script": "npm",
+            "cwd": "/root/lamden_block_service",
+            "args": [
+                "start"
+            ],
+            "wait_ready": true,
+            "watch": false
+        }
+    ]
+}
