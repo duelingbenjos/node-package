@@ -13,16 +13,10 @@ The Lamden node can be configured using environment variables. The following env
 - `LAMDEN_NETWORK` (optional): The network to join to (e.g. `mainnet`, `testnet`). Leave empty to start a new network.
 - `LAMDEN_TAG` and `CONTRACTING_TAG`: The version of [lamden](https://github.com/Lamden/lamden) and [contracting](https://github.com/Lamden/contracting) to use. If `LAMDEN_NETWORK` is set this parameters are ignored.
 
-To set an environment variable, add it to the `docker/.env` file. For example:
+You can use `export` command to set an enviroment variable, for example:
 ```bash
-LAMDEN_SK=beefbeefbeefbeefbeefbeefbeefbeefbeefbeefbeefbeefbeefbeefbeefbeef
-LAMDEN_NETWORK=testnet
-LAMDEN_TAG=v2.0.0
-CONTRACTING_TAG=v2.0.0
-```
-Or run:
-```bash
-export var_name=value
+export LAMDEN_SK=beefbeefbeefbeefbeefbeefbeefbeefbeefbeefbeefbeefbeefbeefbeefbeef
+export LAMDEN_NETWORK=mainnet
 ```
 
 ### Managing a node
