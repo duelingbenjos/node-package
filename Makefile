@@ -12,7 +12,7 @@ else
 endif
 
 	@sleep 3
-	nohup python upgrade.py > upgrade.log 2>&1 &
+	nohup python upgrade.py > /dev/null 2>&1 &
 
 teardown:
 	docker compose -f $(COMPOSE_FILE) down
