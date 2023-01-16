@@ -1,7 +1,7 @@
 COMPOSE_FILE = docker/docker-compose.yml
 
 boot:
-ifeq ($(LAMDEN_NETWORK),mainnet)
+ifeq ($(LAMDEN_NETWORK),arko)
 	export LAMDEN_BOOTNODES="TBD"; \
 	docker compose -f $(COMPOSE_FILE) up -d
 else ifeq ($(LAMDEN_NETWORK),testnet)
@@ -18,7 +18,7 @@ teardown:
 	- pkill -f upgrade
 
 build:
-ifeq ($(LAMDEN_NETWORK),mainnet)
+ifeq ($(LAMDEN_NETWORK),arko)
 	export LAMDEN_TAG="TBD" CONTRACTING_TAG="TBD"; \
 	docker compose -f $(COMPOSE_FILE) build --no-cache
 else ifeq ($(LAMDEN_NETWORK),testnet)

@@ -2,21 +2,19 @@
 This repository contains lamden node package.
 
 ### Prerequisites
+- [Python](https://www.python.org/) 3.6 or above
 - [GNU make](https://www.gnu.org/software/make/)
 - [Docker](https://docs.docker.com/get-docker/)
 - [Docker Compose](https://docs.docker.com/compose/install/)
-- [Python](https://www.python.org/) 3.6 or later
 
 ### Configuration
 The Lamden node can be configured using environment variables. The following environment variables are supported:
 - `LAMDEN_SK` (required): The secret key of the node owner.
-- `LAMDEN_NETWORK` (optional): The network to join to (e.g. `mainnet`, `testnet`). Leave empty to start a new network.
-- `LAMDEN_TAG` and `CONTRACTING_TAG`: The version of [lamden](https://github.com/Lamden/lamden) and [contracting](https://github.com/Lamden/contracting) to use. If `LAMDEN_NETWORK` is set this parameters are ignored.
+- `LAMDEN_NETWORK` (required): The network to join (`arko` or `testnet`).
 
-You can use `export` command to set an enviroment variable, for example:
+Use `export` command to set enviroment variables:
 ```bash
-export LAMDEN_SK=beefbeefbeefbeefbeefbeefbeefbeefbeefbeefbeefbeefbeefbeefbeefbeef
-export LAMDEN_NETWORK=mainnet
+export LAMDEN_SK=beefbeefbeefbeefbeefbeefbeefbeefbeefbeefbeefbeefbeefbeefbeefbeef LAMDEN_NETWORK=arko
 ```
 
 ### Managing a node
