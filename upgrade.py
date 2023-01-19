@@ -32,6 +32,7 @@ async def event(data):
     os.environ['LAMDEN_TAG'] = data['lamden_tag']
     os.environ['CONTRACTING_TAG'] = data['contracting_tag']
     os.environ['LAMDEN_BOOTNODES'] = parse_bootnodes(data['bootnode_ips'])
+    os.environ.pop('LAMDEN_NETWORK', None)
     utc_when = parser.parse(data['utc_when'])
 
     subprocess.check_call(['make', 'build'])
