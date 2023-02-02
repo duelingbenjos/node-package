@@ -30,6 +30,8 @@ endif
 
 deploy: build boot
 
+redeploy: teardown deploy
+
 reboot: teardown boot
 
 enter:
