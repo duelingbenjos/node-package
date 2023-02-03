@@ -8,25 +8,52 @@ This repository contains lamden node package.
 - [Docker Compose](https://docs.docker.com/compose/install/)
 
 ### Configuration
-The Lamden node can be configured using environment variables. The following environment variables are supported:
+The Lamden node package can be configured using environment variables. The following environment variables are supported:
 - `LAMDEN_SK` (required): The secret key of the node owner.
 - `LAMDEN_NETWORK` (required): The network to join (`arko` or `testnet`).
+- `LAMDEN_TAG` (optional): Check out available tags [here](https://github.com/Lamden/lamden/tags). If not set, latest stable version is used by default.
+- `CONTRACTING_TAG` (optional): Check out available tags [here](https://github.com/Lamden/contracting/tags). If not set, latest stable version is used by default.
 
-Use `export` command to set enviroment variables:
+### Setup
 ```bash
-export LAMDEN_SK=beefbeefbeefbeefbeefbeefbeefbeefbeefbeefbeefbeefbeefbeefbeefbeef LAMDEN_NETWORK=arko
+python -m venv venv
+. venv/bin/activate
+pip install -r requirements.txt
 ```
 
-### Managing a node
-To manage a node, the following `make` commands are available:
-- `make build`: Build a base lamden docker image used by all containers using the latest code of the version specified by `LAMDEN_TAG` and `CONTRACTING_TAG`.
-- `make boot`: Start all containers and related scripts.
-- `make deploy`: `build` and `boot` executed sequentially.
-- `make teardown`: Stop all containers and related scripts.
-- `make reboot`: `teardown` and `boot` executed sequentially.
-- `make upgrade`: Rebuild a base image and restart the containers with a fresh image.
-- `make enter service=<lamden_node|lamden_webserver|lamden_events>`: Open a `bash` session in the specified service (container).
-- `make clean`: Delete base lamden docker image.
+### Managing the node package
+:exclamation: **Run this command to purge `LAMDEN_SK` from command line history when you're done setting up the node:**
+```bash
+history -c
+```
+
+#### Deploying
+```bash
+export LAMDEN_SK=<your_sk> LAMDEN_NETWORK=<network>
+
+# Optional
+export LAMDEN_TAG=<tag> CONTRACTING_TAG=<tag>
+
+make deploy
+```
+
+#### Redeploying
+```bash
+export LAMDEN_SK=<your_sk> LAMDEN_NETWORK=<network> LAMDEN_TAG=<tag> CONTRACTING_TAG=<tag>
+make redeploy
+```
+
+#### Restarting
+```bash
+export LAMDEN_SK=<your_sk> LAMDEN_NETWORK=<network>
+make reboot
+```
+
+#### Stopping
+```bash
+export LAMDEN_SK=<your_sk>
+make teardown
+```
 
 ### Contributing
 We welcome contributions to this repository! If you have any suggestions or improvements, please feel free to open an issue or submit a pull request.
