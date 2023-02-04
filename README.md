@@ -1,11 +1,18 @@
 # Lamden Node Package
 This repository contains lamden node package.
 
-### Prerequisites
+### Dependencies
 - [Python](https://www.python.org/) 3.6 or above
 - [GNU make](https://www.gnu.org/software/make/)
 - [Docker](https://docs.docker.com/get-docker/)
 - [Docker Compose](https://docs.docker.com/compose/install/)
+
+### Installation
+```bash
+python -m venv venv
+. venv/bin/activate
+pip install -r requirements.txt
+```
 
 ### Configuration
 The Lamden node package can be configured using environment variables. The following environment variables are supported:
@@ -14,14 +21,8 @@ The Lamden node package can be configured using environment variables. The follo
 - `LAMDEN_TAG` (optional): Check out available tags [here](https://github.com/Lamden/lamden/tags). If not set, latest stable version is used by default.
 - `CONTRACTING_TAG` (optional): Check out available tags [here](https://github.com/Lamden/contracting/tags). If not set, latest stable version is used by default.
 
-### Setup
-```bash
-python -m venv venv
-. venv/bin/activate
-pip install -r requirements.txt
-```
 
-### Managing the node package
+### Usage
 :exclamation: **Run this command to purge `LAMDEN_SK` from command line history when you're done setting up the node:**
 ```bash
 history -c
