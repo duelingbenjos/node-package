@@ -21,37 +21,35 @@ The Lamden node package is configured using the following environment variables:
 - `LAMDEN_TAG` and `CONTRACTING_TAG` (optional): Check out available [lamden](https://github.com/Lamden/lamden/tags) and [contracting](https://github.com/Lamden/contracting/tags) tags. If not set, latest stable tags are used by default.
 
 ### Usage
-:exclamation: **Run this command to purge `LAMDEN_SK` from command line history when you're done setting up the node:**
+:exclamation: **Run this command to purge `LAMDEN_SK` from bash history when you're done:**
 ```bash
 history -c
 ```
 
 #### Deploying
 ```bash
-export LAMDEN_SK=<your_sk> LAMDEN_NETWORK=<network>
-
 # Optional
 export LAMDEN_TAG=<tag> CONTRACTING_TAG=<tag>
 
-make deploy
+. venv/bin/activate
+LAMDEN_SK=<your_sk> LAMDEN_NETWORK=<network> make deploy
 ```
 
 #### Redeploying
 ```bash
-export LAMDEN_SK=<your_sk> LAMDEN_NETWORK=<network> LAMDEN_TAG=<tag> CONTRACTING_TAG=<tag>
-make redeploy
+. venv/bin/activate
+LAMDEN_SK=<your_sk> LAMDEN_NETWORK=<network> LAMDEN_TAG=<tag> CONTRACTING_TAG=<tag> make redeploy
 ```
 
 #### Restarting
 ```bash
-export LAMDEN_SK=<your_sk> LAMDEN_NETWORK=<network>
-make reboot
+. venv/bin/activate
+LAMDEN_SK=<your_sk> LAMDEN_NETWORK=<network> make reboot
 ```
 
 #### Stopping
 ```bash
-export LAMDEN_SK=<your_sk>
-make teardown
+LAMDEN_SK=<your_sk> make teardown
 ```
 
 ### Contributing
