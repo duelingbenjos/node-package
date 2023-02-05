@@ -15,12 +15,10 @@ pip install -r requirements.txt
 ```
 
 ### Configuration
-The Lamden node package can be configured using environment variables. The following environment variables are supported:
+The Lamden node package is configured using the following environment variables:
 - `LAMDEN_SK` (required): The secret key of the node owner.
 - `LAMDEN_NETWORK` (required): The network to join (`arko` or `testnet`).
-- `LAMDEN_TAG` (optional): Check out available tags [here](https://github.com/Lamden/lamden/tags). If not set, latest stable version is used by default.
-- `CONTRACTING_TAG` (optional): Check out available tags [here](https://github.com/Lamden/contracting/tags). If not set, latest stable version is used by default.
-
+- `LAMDEN_TAG` and `CONTRACTING_TAG` (optional): Check out available [lamden](https://github.com/Lamden/lamden/tags) and [contracting](https://github.com/Lamden/contracting/tags) tags. If not set, latest stable tags are used by default.
 
 ### Usage
 :exclamation: **Run this command to purge `LAMDEN_SK` from command line history when you're done setting up the node:**
