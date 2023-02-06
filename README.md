@@ -1,5 +1,5 @@
 # Lamden Node Package
-This repository contains lamden node package.
+This repository contains lamden node package. It consists of several containerized applications: [lamden node software](https://github.com/Lamden/lamden), [lamden webserver](https://github.com/Lamden/lamden/blob/master/lamden/nodes/masternode/webserver.py), [lamden events service](https://github.com/Lamden/lamden/blob/master/lamden/nodes/events.py).
 
 ### Dependencies
 - [Python](https://www.python.org/) 3.6 or above
@@ -9,9 +9,9 @@ This repository contains lamden node package.
 
 ### Installation
 ```bash
-python -m venv venv
-. venv/bin/activate
-pip install -r requirements.txt
+$ python -m venv venv
+$ . venv/bin/activate
+$ pip install -r requirements.txt
 ```
 
 ### Configuration
@@ -23,33 +23,42 @@ The Lamden node package is configured using the following environment variables:
 ### Usage
 :exclamation: **Run this command to purge `LAMDEN_SK` from bash history when you're done:**
 ```bash
-history -c
+$ history -c
 ```
 
 #### Deploying
 ```bash
 # Optional
-export LAMDEN_TAG=<tag> CONTRACTING_TAG=<tag>
+$ export LAMDEN_TAG=<tag> CONTRACTING_TAG=<tag>
 
-. venv/bin/activate
-LAMDEN_SK=<your_sk> LAMDEN_NETWORK=<network> make deploy
+$ . venv/bin/activate
+$ LAMDEN_SK=<your_sk> LAMDEN_NETWORK=<network> make deploy
 ```
 
 #### Redeploying
 ```bash
-. venv/bin/activate
-LAMDEN_SK=<your_sk> LAMDEN_NETWORK=<network> LAMDEN_TAG=<tag> CONTRACTING_TAG=<tag> make redeploy
+$ . venv/bin/activate
+$ LAMDEN_SK=<your_sk> LAMDEN_NETWORK=<network> LAMDEN_TAG=<tag> CONTRACTING_TAG=<tag> make redeploy
 ```
 
 #### Restarting
 ```bash
-. venv/bin/activate
-LAMDEN_SK=<your_sk> LAMDEN_NETWORK=<network> make reboot
+$ . venv/bin/activate
+$ LAMDEN_SK=<your_sk> LAMDEN_NETWORK=<network> make reboot
 ```
 
 #### Stopping
 ```bash
-LAMDEN_SK=<your_sk> make teardown
+$ LAMDEN_SK=<your_sk> make teardown
+```
+
+#### Other
+```bash
+# Viewing the logs
+$ docker logs <lamden_node|lamden_webserver|lamden_events>
+
+# Real-time resource usage
+$ docker stats
 ```
 
 ### Contributing
