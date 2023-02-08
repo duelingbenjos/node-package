@@ -1,5 +1,24 @@
 COMPOSE_FILE = docker/docker-compose.yml
 
+start:
+	docker compose -f $(COMPOSE_FILE) up -d
+
+stop:
+	docker compose -f $(COMPOSE_FILE) down
+
+restart: stop start
+
+build:
+ifeq ($(LAMDEN_NETWORK),arko)
+	export LAMDEN_TAG="v2.0.0" CONTRACTING_TAG="v2.0.0"; \
+	docker compose -f $(COMPOSE_FILE) build --no-cache
+else ifeq ($(LAMDEN_NETWORK),testnet)
+	export LAMDEN_TAG="v2.0.0" CONTRACTING_TAG="v2.0.0"; \
+	docker compose -f $(COMPOSE_FILE) build --no-cache
+else
+	docker compose -f $(COMPOSE_FILE) build --no-cache
+endif
+
 boot:
 ifeq ($(LAMDEN_NETWORK),arko)
 	export LAMDEN_BOOTNODES="64.225.32.184:170.64.178.113:134.122.98.27"; \
@@ -16,20 +35,6 @@ endif
 teardown:
 	docker compose -f $(COMPOSE_FILE) down
 	- pkill -f manager
-
-stop:
-	docker compose -f $(COMPOSE_FILE) down
-
-build:
-ifeq ($(LAMDEN_NETWORK),arko)
-	export LAMDEN_TAG="v2.0.0" CONTRACTING_TAG="v2.0.0"; \
-	docker compose -f $(COMPOSE_FILE) build --no-cache
-else ifeq ($(LAMDEN_NETWORK),testnet)
-	export LAMDEN_TAG="v2.0.0" CONTRACTING_TAG="v2.0.0"; \
-	docker compose -f $(COMPOSE_FILE) build --no-cache
-else
-	docker compose -f $(COMPOSE_FILE) build --no-cache
-endif
 
 deploy: build boot
 

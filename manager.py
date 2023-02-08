@@ -17,7 +17,7 @@ def upgrade_handler(data: dict):
     while utc_when > datetime.utcnow():
         asyncio.sleep(1)
 
-    subprocess.check_call(['make', 'reboot'])
+    subprocess.check_call(['make', 'restart'])
 
 def network_error_handler(data: dict):
     subprocess.check_call(['make', 'stop'])
@@ -32,7 +32,7 @@ def network_error_handler(data: dict):
     os.environ['LAMDEN_BOOTNODES'] = ':'.join(bootnode_ips)
     os.environ.pop('LAMDEN_NETWORK', None)
 
-    subprocess.call(['make', 'reboot'])
+    subprocess.call(['make', 'start'])
 
 event_handlers = {
     'upgrade': upgrade_handler,
@@ -56,7 +56,7 @@ async def event(event: dict):
     event_handlers[event['event']](event['data'])
 
 async def main():
-    await sio.connect(f'http://localhost:{os.environ["LAMDEN_ES_PORT"]}')
+    await sio.connect(f'http://localhost:17080')
     await sio.wait()
 
 if __name__ == "__main__":
