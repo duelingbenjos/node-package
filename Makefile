@@ -11,11 +11,14 @@ else
 	docker compose -f $(COMPOSE_FILE) up -d
 endif
 	@sleep 3
-	nohup python upgrade.py > /dev/null 2>&1 &
+	nohup python manager.py > ./manager.log 2>&1 &
 
 teardown:
 	docker compose -f $(COMPOSE_FILE) down
-	- pkill -f upgrade
+	- pkill -f manager
+
+stop:
+	docker compose -f $(COMPOSE_FILE) down
 
 build:
 ifeq ($(LAMDEN_NETWORK),arko)
