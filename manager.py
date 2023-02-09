@@ -12,15 +12,17 @@ def upgrade_handler(data: dict):
     os.environ.pop('LAMDEN_NETWORK', None)
     utc_when = parser.parse(data['utc_when'])
 
-    subprocess.check_call(['make', 'build'])
+    if subprocess.call(['make', 'build']) != 0:
+        return
 
     while utc_when > datetime.utcnow():
         asyncio.sleep(1)
 
-    subprocess.check_call(['make', 'restart'])
+    subprocess.call(['make', 'restart'])
 
 def network_error_handler(data: dict):
-    subprocess.check_call(['make', 'stop'])
+    if subprocess.call(['make', 'stop']) != 0:
+        return
 
     network_is_down = True
     while network_is_down:
@@ -29,7 +31,7 @@ def network_error_handler(data: dict):
                 network_is_down = False
                 break
 
-    os.environ['LAMDEN_BOOTNODES'] = ':'.join(bootnode_ips)
+    os.environ['LAMDEN_BOOTNODES'] = ':'.join(data['bootnode_ips'])
     os.environ.pop('LAMDEN_NETWORK', None)
 
     subprocess.call(['make', 'start'])
