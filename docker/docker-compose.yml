@@ -9,11 +9,11 @@ services:
         LAMDEN_TAG: ${LAMDEN_TAG?}
         CONTRACTING_TAG: ${CONTRACTING_TAG?}
     working_dir: /lamden/lamden/nodes
-    command: sh -c "python events.py -p ${LAMDEN_ES_PORT}"
+    command: sh -c "python events.py -p 17080"
     volumes:
       - ${HOME}/.lamden:/root/.lamden
     ports:
-      - ${LAMDEN_ES_PORT}:${LAMDEN_ES_PORT}
+      - 17080:17080
     networks:
       - lamden_network
     logging:
@@ -27,13 +27,13 @@ services:
     depends_on:
       - lamden_events
     working_dir: /lamden/lamden/nodes/masternode
-    command: sh -c "python webserver.py -p ${LAMDEN_WS_PORT} -ep ${LAMDEN_ES_PORT}"
+    command: sh -c "python webserver.py -p 18080 -ep 17080"
     volumes:
       - ${HOME}/.lamden:/root/.lamden
     environment:
       - LAMDEN_SK=${LAMDEN_SK?}
     ports:
-      - ${LAMDEN_WS_PORT}:${LAMDEN_WS_PORT}
+      - 18080:18080
     networks:
       - lamden_network
     logging:
