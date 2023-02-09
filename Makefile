@@ -34,7 +34,7 @@ endif
 
 teardown:
 	docker compose -f $(COMPOSE_FILE) down
-	- pkill -f manager
+	- pkill -f manager.py
 
 deploy: build boot
 
