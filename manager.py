@@ -30,7 +30,6 @@ async def network_error_handler(data: dict):
             if subprocess.call(['ping', '-c', '1', ip]) == 0:
                 network_is_down = False
                 break
-        await asyncio.sleep(1)
 
     os.environ['LAMDEN_BOOTNODES'] = ':'.join(data['bootnode_ips'])
     os.environ.pop('LAMDEN_NETWORK', None)
