@@ -5,7 +5,7 @@ import os
 import socketio
 import subprocess
 
-def upgrade_handler(data: dict):
+async def upgrade_handler(data: dict):
     os.environ['LAMDEN_TAG'] = data['lamden_tag']
     os.environ['CONTRACTING_TAG'] = data['contracting_tag']
     os.environ['LAMDEN_BOOTNODES'] = ':'.join(data['bootnode_ips'])
@@ -16,11 +16,11 @@ def upgrade_handler(data: dict):
         return
 
     while utc_when > datetime.utcnow():
-        asyncio.sleep(1)
+        await asyncio.sleep(1)
 
     subprocess.call(['make', 'restart'])
 
-def network_error_handler(data: dict):
+async def network_error_handler(data: dict):
     if subprocess.call(['make', 'stop']) != 0:
         return
 
@@ -30,6 +30,7 @@ def network_error_handler(data: dict):
             if subprocess.call(['ping', '-c', '1', ip]) == 0:
                 network_is_down = False
                 break
+        await asyncio.sleep(1)
 
     os.environ['LAMDEN_BOOTNODES'] = ':'.join(data['bootnode_ips'])
     os.environ.pop('LAMDEN_NETWORK', None)
@@ -55,7 +56,7 @@ async def disconnect():
 
 @sio.event
 async def event(event: dict):
-    event_handlers[event['event']](event['data'])
+    await event_handlers[event['event']](event['data'])
 
 async def main():
     await sio.connect(f'http://localhost:17080')
