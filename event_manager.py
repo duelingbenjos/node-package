@@ -31,7 +31,7 @@ async def upgrade_handler(data: dict):
     while utc_when > datetime.utcnow():
         await asyncio.sleep(1)
 
-    await run_command(['make', 'reboot'])
+    await run_command(['make', 'restart'])
 
 async def network_error_handler(data: dict):
     if await run_command(['make', 'stop']) != 0:
