@@ -30,7 +30,8 @@ else
 	docker compose -f $(COMPOSE_FILE) up -d
 endif
 	@sleep 3
-	nohup python manager.py > ./manager.log 2>&1 &
+	mkdir -p logs
+	nohup python manager.py > logs/manager.log 2>&1 &
 
 teardown:
 	docker compose -f $(COMPOSE_FILE) down

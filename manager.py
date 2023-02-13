@@ -12,12 +12,13 @@ async def run_command(args):
     )
 
     stdout, stderr = await process.communicate()
-    if stdout:
-        with open(f'{"_".join(args)}_stdout.log', 'w') as f:
-            f.write(stdout.decode())
-    if stderr:
-        with open(f'{"_".join(args)}_stderr.log', 'w') as f:
-            f.write(stderr.decode())
+    if process.returncode != 0:
+        if stdout:
+            with open(f'logs/{"_".join(args)}_stdout.log', 'w') as f:
+                f.write(stdout.decode())
+        if stderr:
+            with open(f'logs/{"_".join(args)}_stderr.log', 'w') as f:
+                f.write(stderr.decode())
     
     return process.returncode
 
