@@ -9,13 +9,14 @@ async def run_command(args):
         process = await asyncio.create_subprocess_exec(*args, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE)
 
         writer = asyncio.StreamWriter(f, None, None, loop)
-        stdout, stderr = await asyncio.gather(process.stdout.read(), process.stderr.read())
-        writer.write(stdout); writer.write(stderr)
+        async with process:
+            stdout, stderr = await asyncio.gather(process.stdout.read(), process.stderr.read())
+            writer.write(stdout); writer.write(stderr)
 
-        await writer.drain()
-        writer.close()
+            await writer.drain()
+            writer.close()
         
-    return await process.wait()
+            return await process.wait()
 
 async def upgrade_handler(data: dict):
     os.environ['LAMDEN_TAG'] = data['lamden_tag']
