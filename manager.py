@@ -59,7 +59,7 @@ async def disconnect():
 
 @sio.event
 async def event(event: dict):
-    asyncio.create_task(event_handlers[event['event']](event['data']))
+    asyncio.ensure_future(event_handlers[event['event']](event['data']))
 
 async def main():
     await sio.connect(f'http://localhost:17080')
