@@ -8,17 +8,13 @@ async def run_command(args):
     process = await asyncio.create_subprocess_exec(
         *args,
         stdout=asyncio.subprocess.PIPE,
-        stderr=asyncio.subprocess.PIPE
+        stderr=asyncio.subprocess.STDOUT
     )
 
-    stdout, stderr = await process.communicate()
-    if process.returncode != 0:
-        if stdout:
-            with open(f'logs/{"_".join(args)}_stdout.log', 'w') as f:
-                f.write(stdout.decode())
-        if stderr:
-            with open(f'logs/{"_".join(args)}_stderr.log', 'w') as f:
-                f.write(stderr.decode())
+    stdout, _ = await process.communicate()
+    if process.returncode != 0 and stdout:
+        with open(f'logs/{"_".join(args)}_{datetime.now().strftime("%Y%m%d_%H:%M:%S")}.log', 'w') as f:
+            f.write(stdout.decode())
     
     return process.returncode
 
