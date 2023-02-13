@@ -5,8 +5,17 @@ import os
 import socketio
 
 async def run_command(args):
-    process = await asyncio.create_subprocess_exec(*args, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE)
+    with open(f'{"_".join(args)}.log', 'w') as f:
+        process = await asyncio.create_subprocess_exec(*args, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE)
 
+        writer = asyncio.StreamWriter(f, None, None, loop)
+        async with process:
+            stdout, stderr = await asyncio.gather(process.stdout.read(), process.stderr.read())
+            writer.write(stdout); writer.write(stderr)
+
+            await writer.drain()
+            writer.close()
+        
     return await process.wait()
 
 async def upgrade_handler(data: dict):
@@ -66,4 +75,5 @@ async def main():
     await sio.wait()
 
 if __name__ == "__main__":
-    asyncio.get_event_loop().run_until_complete(main())
+    loop = asyncio.get_event_loop()
+    loop.run_until_complete(main())
