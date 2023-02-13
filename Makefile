@@ -30,7 +30,7 @@ else
 	docker compose -f $(COMPOSE_FILE) up -d
 endif
 	@sleep 3
-	mkdir -p logs
+	@mkdir -p logs
 	nohup python event_manager.py > /dev/null 2>&1 &
 
 teardown:
