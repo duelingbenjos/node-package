@@ -9,12 +9,11 @@ async def run_command(args):
         process = await asyncio.create_subprocess_exec(*args, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE)
 
         writer = asyncio.StreamWriter(f, None, None, loop)
-        async with process:
-            stdout, stderr = await asyncio.gather(process.stdout.read(), process.stderr.read())
-            writer.write(stdout); writer.write(stderr)
+        stdout, stderr = await asyncio.gather(process.stdout.read(), process.stderr.read())
+        writer.write(stdout); writer.write(stderr)
 
-            await writer.drain()
-            writer.close()
+        await writer.drain()
+        writer.close()
         
     return await process.wait()
 
