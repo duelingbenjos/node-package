@@ -31,11 +31,11 @@ else
 endif
 	@sleep 3
 	mkdir -p logs
-	nohup python manager.py > logs/manager.log 2>&1 &
+	nohup python event_manager.py > logs/event_manager.log 2>&1 &
 
 teardown:
 	docker compose -f $(COMPOSE_FILE) down
-	- pkill -f manager.py
+	- pkill -f event_manager.py
 
 deploy: build boot
 
