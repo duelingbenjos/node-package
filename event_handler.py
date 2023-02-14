@@ -23,13 +23,13 @@ async def upgrade_handler(data: dict):
     os.environ['CONTRACTING_TAG'] = data['contracting_tag']
     os.environ['LAMDEN_BOOTNODES'] = ':'.join(data['bootnode_ips'])
     os.environ.pop('LAMDEN_NETWORK', None)
-    utc_when = parser.parse(data['utc_when'])
 
     if await run_command(['make', 'build']) != 0:
         return
 
-    while utc_when > datetime.utcnow():
-        await asyncio.sleep(1)
+    delta = (parser.parse(data['utc_when']) - datetime.utcnow()).total_seconds()
+    if delta > 0:
+        await asyncio.sleep(delta)
 
     await run_command(['make', 'restart'])
 
@@ -54,7 +54,7 @@ event_handlers = {
     'network_error': network_error_handler
 }
 
-sio = socketio.AsyncClient(logger=True, engineio_logger=True)
+sio = socketio.AsyncClient()
 
 @sio.event
 async def connect():
