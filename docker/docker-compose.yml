@@ -9,7 +9,7 @@ services:
         LAMDEN_TAG: ${LAMDEN_TAG?}
         CONTRACTING_TAG: ${CONTRACTING_TAG?}
     working_dir: /lamden/lamden/nodes
-    command: sh -c "python events.py -p 17080"
+    command: "python events.py -p 17080"
     volumes:
       - ${HOME}/.lamden:/root/.lamden
     ports:
@@ -27,7 +27,7 @@ services:
     depends_on:
       - lamden_events
     working_dir: /lamden/lamden/nodes/masternode
-    command: sh -c "python webserver.py -p 18080 -ep 17080"
+    command: "python webserver.py -p 18080 -ep 17080"
     volumes:
       - ${HOME}/.lamden:/root/.lamden
     environment:
@@ -47,7 +47,7 @@ services:
     depends_on:
       - lamden_webserver
     working_dir: /lamden
-    command: sh -c "[ -z ${LAMDEN_BOOTNODES} ] && lamden start -d True || lamden join -d True"
+    command: sh -c "[ -z ${LAMDEN_BOOTNODES} ] && exec lamden start -d True || exec lamden join -d True"
     volumes:
       - ${HOME}/constitution.json:/root/constitution.json
       - ${HOME}/genesis_block.json:/root/genesis_block.json
