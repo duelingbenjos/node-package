@@ -31,7 +31,7 @@ else
 endif
 	@sleep 3
 	@mkdir -p logs
-	nohup python event_handler.py > logs/event_handler.log 2>&1 &
+	nohup python event_handler.py > /dev/null 2>&1 &
 
 teardown:
 	docker compose -f $(COMPOSE_FILE) down
