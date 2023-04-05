@@ -10,10 +10,10 @@ restart: stop start
 
 build:
 ifeq ($(LAMDEN_NETWORK),arko)
-	export LAMDEN_TAG="v2.0.14" CONTRACTING_TAG="v2.0.2"; \
+	export LAMDEN_TAG="v2.0.15" CONTRACTING_TAG="v2.0.5"; \
 	docker compose -f $(COMPOSE_FILE) build --no-cache
 else ifeq ($(LAMDEN_NETWORK),testnet)
-	export LAMDEN_TAG="v2.0.14" CONTRACTING_TAG="v2.0.2"; \
+	export LAMDEN_TAG="v2.0.15" CONTRACTING_TAG="v2.0.5"; \
 	docker compose -f $(COMPOSE_FILE) build --no-cache
 else
 	docker compose -f $(COMPOSE_FILE) build --no-cache
