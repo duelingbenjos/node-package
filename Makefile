@@ -23,9 +23,9 @@ endif
 
 boot:
 ifeq ($(LAMDEN_PRIVATE_NETWORK),)
-	boot-original
+	$(MAKE) boot-original
 else
-	boot-private
+	$(MAKE) boot-private
 endif
 
 boot-original:
@@ -44,7 +44,7 @@ endif
 
 boot-private:
 	export LAMDEN_PRIVATE_NETWORK=$(HOST_IP); \
-	boot-original
+	$(MAKE) boot-original
 
 teardown:
 	docker compose -f $(COMPOSE_FILE) down
