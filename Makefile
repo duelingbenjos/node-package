@@ -26,6 +26,7 @@ ifeq ($(LAMDEN_PRIVATE_NETWORK),)
 	boot-original
 else
 	boot-private
+endif
 
 boot-original:
 ifeq ($(LAMDEN_NETWORK),arko)
