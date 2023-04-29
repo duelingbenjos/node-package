@@ -61,5 +61,50 @@ $ docker logs <lamden_node|lamden_webserver|lamden_events>
 $ docker stats
 ```
 
+## Lamden Genesis Block Downloader
+
+### Description
+
+This utility downloads the Lamden Genesis Block and its associated state changes from the Lamden GitHub repository. The Genesis Block contains the initial state of the blockchain, and the state changes include all the transactions that modify the blockchain's state. The script prompts you to select an environment (mainnet, testnet, or staging) and optionally allows you to specify a destination directory for the downloaded `genesis_block.json` file.
+
+### Requirements
+
+- Python 3.6+
+- `requests` library
+
+### Installation
+
+1. Install the `requests` library:
+
+```bash
+pip install requests
+```
+
+### Running the Script
+To run the script, navigate to the directory containing the `get_genesis_block.py` file and execute the following command:
+
+```bash
+python utils/get_genesis_block.py
+```
+
+The script will prompt you to enter the environment (mainnet, testnet, or staging). If you don't provide any input, it will default to "mainnet".
+
+Optionally, you can specify a destination directory for the `genesis_block.json` file using the `-d` or `--dest` flag:
+
+```bash
+python utils/get_genesis_block.py -d /path/to/destination
+```
+
+If a `genesis_block.json` file already exists in the specified destination, the script will prompt you to overwrite it
+
+Once the download is complete, the Genesis Block will be saved as a `genesis_block.json` file in the specified destination directory.
+
+### Example
+```bash
+python utils/get_genesis_block.py -d /home/user/my-genesis-blocks
+```
+
+This command downloads the Genesis Block and associated state changes for the selected environment, saving the `genesis_block.json` file to the `/home/user/my-genesis-blocks` directory.
+
 ### Contributing
 We welcome contributions to this repository! If you have any suggestions or improvements, please feel free to open an issue or submit a pull request.
