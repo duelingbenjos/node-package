@@ -5,6 +5,7 @@ ARG CONTRACTING_TAG
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get install -y libhdf5-dev
+RUN pip install packaging
 
 workdir /
 RUN git clone https://github.com/Lamden/contracting && cd contracting && git checkout tags/${CONTRACTING_TAG} && python setup.py install && cd ..
