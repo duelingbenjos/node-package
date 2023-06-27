@@ -21,5 +21,10 @@ class LinkRepairer:
                             os.symlink(new_target, filepath)
 
 if __name__ == "__main__":
-    repairer = LinkRepairer("/root/.lamden/block_alias")
+    if len(sys.argv) < 2:
+        print("Usage: python repair_block_alias.py <root_directory>")
+        sys.exit(1)
+        
+    root_dir = sys.argv[1]
+    repairer = LinkRepairer(root_dir)
     repairer.repair_links()
