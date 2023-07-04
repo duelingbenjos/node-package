@@ -52,7 +52,9 @@ teardown:
 	- pkill -f event_handler.py
 
 rollback:
-	export LAMDEN_ROLLBACK=$(filter-out $@,$(MAKECMDGOALS)); \
+	@echo "Validating rollback value, BLOCK_NUMBER=$(BLOCK_NUMBER)..."
+	@./utils/validate_block_number.sh $(BLOCK_NUMBER)
+	@export LAMDEN_ROLLBACK=$(BLOCK_NUMBER); \
 	$(MAKE) boot
 
 deploy: build boot
