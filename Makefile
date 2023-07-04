@@ -41,6 +41,7 @@ endif
 	@sleep 3
 	@mkdir -p logs
 	nohup python event_handler.py > /dev/null 2>&1 &
+	unset LAMDEN_ROLLBACK
 
 boot-private:
 	export LAMDEN_PRIVATE_NETWORK=$(HOST_IP); \
@@ -49,6 +50,10 @@ boot-private:
 teardown:
 	docker compose -f $(COMPOSE_FILE) down
 	- pkill -f event_handler.py
+
+rollback:
+	export LAMDEN_ROLLBACK=$(filter-out $@,$(MAKECMDGOALS)); \
+	$(MAKE) boot
 
 deploy: build boot
 
