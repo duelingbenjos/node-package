@@ -41,6 +41,7 @@ endif
 	@sleep 3
 	@mkdir -p logs
 	nohup python event_handler.py > /dev/null 2>&1 &
+	unset LAMDEN_ROLLBACK
 
 boot-private:
 	export LAMDEN_PRIVATE_NETWORK=$(HOST_IP); \
@@ -49,6 +50,12 @@ boot-private:
 teardown:
 	docker compose -f $(COMPOSE_FILE) down
 	- pkill -f event_handler.py
+
+rollback:
+	@echo "Validating rollback value, BLOCK_NUMBER=$(BLOCK_NUMBER)..."
+	@./utils/validate_block_number.sh $(BLOCK_NUMBER)
+	@export LAMDEN_ROLLBACK=$(BLOCK_NUMBER); \
+	$(MAKE) boot
 
 deploy: build boot
 
