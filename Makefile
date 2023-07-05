@@ -22,6 +22,7 @@ else
 endif
 
 boot:
+@export DISABLE_CATCHUP=$(DISABLE_CATCHUP); \
 ifeq ($(LAMDEN_PRIVATE_NETWORK),)
 	$(MAKE) boot-original
 else
@@ -42,6 +43,7 @@ endif
 	@mkdir -p logs
 	nohup python event_handler.py > /dev/null 2>&1 &
 	unset LAMDEN_ROLLBACK
+	unset DISABLE_CATCHUP
 
 boot-private:
 	export LAMDEN_PRIVATE_NETWORK=$(HOST_IP); \
