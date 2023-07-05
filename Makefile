@@ -22,12 +22,12 @@ else
 endif
 
 boot:
-export DISABLE_CATCHUP=$(DISABLE_CATCHUP); \
-ifeq ($(LAMDEN_PRIVATE_NETWORK),)
-	$(MAKE) boot-original
-else
-	$(MAKE) boot-private
-endif
+	@export DISABLE_CATCHUP=$(DISABLE_CATCHUP); \
+	if [ -z "$(LAMDEN_PRIVATE_NETWORK)" ]; then \
+		$(MAKE) boot-original; \
+	else \
+		$(MAKE) boot-private; \
+	fi
 
 boot-original:
 ifeq ($(LAMDEN_NETWORK),arko)
