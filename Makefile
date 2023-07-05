@@ -22,7 +22,7 @@ else
 endif
 
 boot:
-@export DISABLE_CATCHUP=$(DISABLE_CATCHUP); \
+export DISABLE_CATCHUP=$(DISABLE_CATCHUP); \
 ifeq ($(LAMDEN_PRIVATE_NETWORK),)
 	$(MAKE) boot-original
 else
