@@ -23,6 +23,7 @@ endif
 
 boot:
 	@export DISABLE_CATCHUP=$(DISABLE_CATCHUP); \
+	@export DISABLE_VALIDATION=$(DISABLE_VALIDATION); \
 	if [ -z "$(LAMDEN_PRIVATE_NETWORK)" ]; then \
 		$(MAKE) boot-original; \
 	else \
@@ -44,6 +45,7 @@ endif
 	nohup python event_handler.py > /dev/null 2>&1 &
 	unset LAMDEN_ROLLBACK
 	unset DISABLE_CATCHUP
+	unset DISABLE_VALIDATION
 
 boot-private:
 	export LAMDEN_PRIVATE_NETWORK=$(HOST_IP); \
