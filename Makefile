@@ -24,6 +24,7 @@ endif
 boot:
 	@export DISABLE_CATCHUP=$(DISABLE_CATCHUP); \
 	@export DISABLE_VALIDATION=$(DISABLE_VALIDATION); \
+	@export SAFE_BLOCK_NUM=$(SAFE_BLOCK_NUM); \
 	if [ -z "$(LAMDEN_PRIVATE_NETWORK)" ]; then \
 		$(MAKE) boot-original; \
 	else \
@@ -46,6 +47,7 @@ endif
 	unset LAMDEN_ROLLBACK
 	unset DISABLE_CATCHUP
 	unset DISABLE_VALIDATION
+	unset SAFE_BLOCK_NUM
 
 boot-private:
 	export LAMDEN_PRIVATE_NETWORK=$(HOST_IP); \
