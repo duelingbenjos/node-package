@@ -22,9 +22,9 @@ else
 endif
 
 boot:
-	@export DISABLE_CATCHUP=$(DISABLE_CATCHUP); \
-	@export DISABLE_VALIDATION=$(DISABLE_VALIDATION); \
-	@export SAFE_BLOCK_NUM=$(SAFE_BLOCK_NUM); \
+	export DISABLE_CATCHUP=$(DISABLE_CATCHUP); \
+	export DISABLE_VALIDATION=$(DISABLE_VALIDATION); \
+	export SAFE_BLOCK_NUM=$(SAFE_BLOCK_NUM); \
 	if [ -z "$(LAMDEN_PRIVATE_NETWORK)" ]; then \
 		$(MAKE) boot-original; \
 	else \
@@ -60,7 +60,7 @@ teardown:
 rollback:
 	@echo "Validating rollback value, BLOCK_NUMBER=$(BLOCK_NUMBER)..."
 	@./utils/validate_block_number.sh $(BLOCK_NUMBER)
-	@export LAMDEN_ROLLBACK=$(BLOCK_NUMBER); \
+	export LAMDEN_ROLLBACK=$(BLOCK_NUMBER); \
 	$(MAKE) boot
 
 deploy: build boot
