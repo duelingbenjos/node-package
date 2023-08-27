@@ -33,10 +33,7 @@ boot:
 
 boot-original:
 ifeq ($(LAMDEN_NETWORK),arko)
-	export LAMDEN_BOOTNODES="64.225.32.184:170.64.178.113:134.122.98.27"; \
-	docker compose -f $(COMPOSE_FILE) up -d
-else ifeq ($(LAMDEN_NETWORK),testnet)
-	export LAMDEN_BOOTNODES="128.199.9.156:178.62.52.51:142.93.210.208"; \
+	export LAMDEN_BOOTNODES="51.195.80.28"; \
 	docker compose -f $(COMPOSE_FILE) up -d
 else
 	docker compose -f $(COMPOSE_FILE) up -d

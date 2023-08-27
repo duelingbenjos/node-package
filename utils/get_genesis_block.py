@@ -8,7 +8,7 @@ import argparse
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO)
 
-GENESIS_URL = "https://raw.githubusercontent.com/Lamden/genesis_block/main"
+GENESIS_URL = "https://github.com/crosschainer/genesis_block/main"
 
 class GenesisBlockDownloader:
     def __init__(self, environment, destination):

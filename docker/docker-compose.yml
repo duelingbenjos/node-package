@@ -50,7 +50,6 @@ services:
     command: sh -c "[ -z ${LAMDEN_ROLLBACK} ] && ([ -z ${LAMDEN_BOOTNODES} ] && exec lamden start -d True || exec lamden join -d True) || exec lamden join -d True -rp ${LAMDEN_ROLLBACK}"
     volumes:
       - ${HOME}/constitution.json:/root/constitution.json
-      - ${HOME}/genesis_block.json:/root/genesis_block.json
       - ${HOME}/.lamden:/root/.lamden
     environment:
       - LAMDEN_SK=${LAMDEN_SK?}
