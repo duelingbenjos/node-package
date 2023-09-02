@@ -1,7 +1,7 @@
 v1.0 - This README is already for the forked version
 
-# Lamden Node Package
-This repository contains lamden node package. It consists of several containerized applications: the [node software](https://github.com/Lamden/lamden), the [webserver](https://github.com/Lamden/lamden/blob/master/lamden/nodes/masternode/webserver.py) and the [events service](https://github.com/Lamden/lamden/blob/master/lamden/nodes/events.py).
+# Forked Node Package
+This repository contains a modified lamden node package. It consists of several containerized applications: the [node software](https://github.com/Lamden/lamden), the [webserver](https://github.com/Lamden/lamden/blob/master/lamden/nodes/masternode/webserver.py) and the [events service](https://github.com/Lamden/lamden/blob/master/lamden/nodes/events.py).
 
 **You wont be able to run this node unless you joined as a masternode operator with your node wallet.**
 
@@ -59,3 +59,7 @@ $ docker logs <lamden_node|lamden_webserver|lamden_events>
 $ docker stats
 ```
 
+#### You want to use the new network as a normal user?
+You can add the network to your Lamden Wallet like this:
+
+![Wallet](wallet.png)
