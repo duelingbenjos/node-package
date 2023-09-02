@@ -3,6 +3,8 @@ v1.0 - This README is already for the forked version
 # Lamden Node Package
 This repository contains lamden node package. It consists of several containerized applications: the [node software](https://github.com/Lamden/lamden), the [webserver](https://github.com/Lamden/lamden/blob/master/lamden/nodes/masternode/webserver.py) and the [events service](https://github.com/Lamden/lamden/blob/master/lamden/nodes/events.py).
 
+**You wont be able to run this node unless you joined as a masternode operator with your node wallet.**
+
 ### Dependencies
 - [Python](https://www.python.org/) 3.6 or above
 - [GNU make](https://www.gnu.org/software/make/)
