@@ -10,6 +10,7 @@ This repository contains a modified lamden node package. It consists of several 
 - [GNU make](https://www.gnu.org/software/make/)
 - [Docker](https://docs.docker.com/get-docker/)
 - [Docker Compose](https://docs.docker.com/compose/install/)
+
 You can use the following guide to get the dependencies above: https://arko.lamden.io/installation/ubuntu/getting_started/
 
 #### First run
