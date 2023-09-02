@@ -47,7 +47,7 @@ services:
     depends_on:
       - lamden_webserver
     working_dir: /lamden
-    command: sh -c "[ -z ${LAMDEN_ROLLBACK} ] && ([ -z ${LAMDEN_BOOTNODES} ] && exec lamden start -d True || exec lamden join -d True) || exec lamden join -d True -rp ${LAMDEN_ROLLBACK}"
+    command: sh -c "[ -z ${LAMDEN_ROLLBACK} ] && ([ -z ${LAMDEN_BOOTNODES} ] && exec lamden start -d True -gb ${HOME}/.lamden/genesis_block.json || exec lamden join -d True -gb ${HOME}/.lamden/genesis_block.json) || exec lamden join -d True -rp ${LAMDEN_ROLLBACK}"
     volumes:
       - ${HOME}/constitution.json:/root/constitution.json
       - ${HOME}/.lamden:/root/.lamden
