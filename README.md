@@ -1,6 +1,6 @@
 v1.0 - This README is already for the sidechain version
 
-# Forked Node Package
+# Sidechain Node Package
 This repository contains a modified sidechain lamden node package. It consists of several containerized applications: the [node software](https://github.com/Lamden/lamden), the [webserver](https://github.com/Lamden/lamden/blob/master/lamden/nodes/masternode/webserver.py) and the [events service](https://github.com/Lamden/lamden/blob/master/lamden/nodes/events.py).
 
 **You wont be able to join the sidechain network with this node unless you joined as a masternode operator with your node wallet.**
